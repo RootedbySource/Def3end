@@ -23,9 +23,9 @@ policies:
     mode:
       type: periodic
       schedule: "rate(1 hour)"
-      role: arn:aws:iam::<YOUR-ACCOUNT>:role/cloud-custodian-role-deploy-lambdas
+      role: arn:aws:iam::794038212460:role/cloud-custodian-role-deploy-lambdas
       execution-options:
-        assume_role: arn:aws:iam::<YOUR-ACCOUNT>:role/cloud-custodian-role-s3-lambda
+        assume_role: arn:aws:iam::794038212460:role/cloud-custodian-role-s3-lambda
         metrics: aws
     description: s3 buckets without public access blocked are re-enabled
     filters:

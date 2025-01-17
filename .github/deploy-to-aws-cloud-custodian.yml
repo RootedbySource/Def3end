@@ -1,4 +1,5 @@
 name: Connect to an AWS role from a GitHub repository
+
 on:
   push:
     branches: [ main ]
@@ -6,32 +7,36 @@ on:
     branches: [ main ]
 
 env:
-  
-  AWS_REGION : "us-east-2" #Change to reflect your Region
+  AWS_REGION: "us-east-1" # Change to reflect your AWS Region
 
-# Permission can be added at job level or workflow level    
 permissions:
-      id-token: write   # This is required for requesting the JWT
-      contents: read    # This is required for actions/checkout
+  id-token: write  # Required for requesting the JWT
+  contents: read   # Required for actions/checkout
+
 jobs:
   InstallPythonAssumeIAMRole:
     runs-on: ubuntu-latest
     steps:
       - name: Git clone the repository
         uses: actions/checkout@v4
-      - name: configure aws credentials
+
+      - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::794038212460:role/Rootedbysource-Role-9ztBCjFlEeep #change to reflect your IAM role’s ARN
-          role-session-name: Rootedbysource-Role-9ztBCjFlEeep 
+          role-to-assume: arn:aws:iam::794038212460:role/Rootedbysource-Role-9ztBCjFlEeep # Change to reflect your IAM role's ARN
+          role-session-name: Rootedbysource-Role-9ztBCjFlEeep
           aws-region: ${{ env.AWS_REGION }}
-      - name: Deploy Cloud Custodian Policy
+
+      - name: Setup Python environment
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10' 
-      - run: pip install c7n
+          python-version: '3.10'
+
+      - name: Install Cloud Custodian
+        run: pip install c7n
+
       - name: Validate Cloud Custodian Policy
-        run: |
-          custodian validate ./sample-policy.yml
-          run: |
-            custodian run --region us-east-1 --verbose ./sample-policy.yml -s ./out-log/  
+        run: custodian validate ./sample-policy.yml
+
+      - name: Deploy Cloud Custodian Policy
+        run: custodian run --region ${{ env.AWS_REGION }} --verbose ./sample-policy.yml -s ./out-log/

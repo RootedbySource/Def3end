@@ -20,24 +20,24 @@ jobs:
       - name: Git clone the repository
         uses: actions/checkout@v4
 
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v4
-      with:
-        role-to-assume: arn:aws:iam::794038212460:role/Rootedbysource-Role-9ztBCjFlEeep  # change to reflect your IAM role’s ARN
-        role-session-name: Rootedbysource-Role-9ztBCjFlEeep
-        aws-region: us-east-1
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::794038212460:role/Rootedbysource-Role-9ztBCjFlEeep  # change to reflect your IAM role’s ARN
+          role-session-name: Rootedbysource-Role-9ztBCjFlEeep
+          aws-region: us-east-1
 
-    - name: Deploy Cloud Custodian Policy
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.10' 
+      - name: Deploy Cloud Custodian Policy
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
 
-    - run: pip install c7n
+      - run: pip install c7n
 
-    - name: Validate Cloud Custodian Policy
-      run: |
-        custodian validate ./.github/workflows/sample-policy.yml
+      - name: Validate Cloud Custodian Policy
+        run: |
+          custodian validate ./.github/workflows/sample-policy.yml
 
-    - name: Run Cloud Custodian Policy
-      run: |
-        custodian run --region us-east-1 --verbose --output-dir ./out-log/ ./.github/workflows/sample-policy.yml
+      - name: Run Cloud Custodian Policy
+        run: |
+          custodian run --region us-east-1 --verbose --output-dir ./out-log/ ./.github/workflows/sample-policy.yml

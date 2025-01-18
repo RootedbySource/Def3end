@@ -15,10 +15,10 @@ permissions:
       contents: read    # This is required for actions/checkout
 jobs:
   InstallPythonAssumeIAMRole:
-  runs-on: ubuntu-latest
-  steps:
-    - name: Git clone the repository
-      uses: actions/checkout@v4
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git clone the repository
+        uses: actions/checkout@v4
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v4

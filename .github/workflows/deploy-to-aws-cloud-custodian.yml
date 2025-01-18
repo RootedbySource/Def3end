@@ -23,8 +23,8 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::794038212460:role/Rootedbysource-Role-9ztBCjFlEeep #change to reflect your IAM role’s ARN
-          role-session-name: GitHub_to_AWS_via_FederatedOIDC
-          aws-region: ${{ env.AWS_REGION }}
+          role-session-name: Rootedbysource-Role-9ztBCjFlEeep
+          aws-region: us-east-1
       - name: Deploy Cloud Custodian Policy
         uses: actions/setup-python@v5
         with:

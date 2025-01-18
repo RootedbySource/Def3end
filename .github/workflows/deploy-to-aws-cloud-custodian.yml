@@ -12,20 +12,20 @@ env:
 # Permission can be added at job level or workflow level    
 permissions:
       id-token: write   # This is required for requesting the JWT
-      contents: read    # This is required for actions/checkout
-jobs:
+      contents: read    # This is required for actions/checkoutjobs:  InstallPythonAssumeIAMRole:<<<<<<< HEA    runs-on: ubuntu-latest    steps:      - name: Git clone the repositor        uses: actions/checkout@v4
+
+
+
+
+
+
+
+      jobs:
   InstallPythonAssumeIAMRole:
-<<<<<<< HEAD
     runs-on: ubuntu-latest
     steps:
       - name: Git clone the repository
         uses: actions/checkout@v4
-=======
-      runs-on: ubuntu-latest
-  steps:
-    - name: Git clone the repository
-      uses: actions/checkout@v4
->>>>>>> 077e04e1872481a81caaa4763dcb0474c4187cf4
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4

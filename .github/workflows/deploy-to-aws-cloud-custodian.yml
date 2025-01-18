@@ -41,3 +41,4 @@ jobs:
       - name: Run Cloud Custodian Policy
         run: |
           custodian run --region us-east-1 --verbose --output-dir ./out-log/ ./.github/workflows/sample-policy.yml
+

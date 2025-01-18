@@ -13,14 +13,7 @@ env:
 permissions:
       id-token: write   # This is required for requesting the JWT
       contents: read    # This is required for actions/checkoutjobs:  InstallPythonAssumeIAMRole:<<<<<<< HEA    runs-on: ubuntu-latest    steps:      - name: Git clone the repositor        uses: actions/checkout@v4
-
-
-
-
-
-
-
-      jobs:
+jobs:
   InstallPythonAssumeIAMRole:
     runs-on: ubuntu-latest
     steps:
